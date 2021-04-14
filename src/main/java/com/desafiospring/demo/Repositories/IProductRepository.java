@@ -2,7 +2,6 @@ package com.desafiospring.demo.Repositories;
 
 import com.desafiospring.demo.DTO.ProductDTO;
 import com.desafiospring.demo.ExceptionsHandler.findCategoryException;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -12,5 +11,5 @@ public interface IProductRepository {
     public List<ProductDTO> productList();
 
     // Firma para mapear productos por categoria
-    public List<ProductDTO> getProductByCategory(String categoryName) throws findCategoryException;
+    public List<ProductDTO> filter(ProductDTO producto) throws findCategoryException;
 }

@@ -24,31 +24,20 @@ public class ProductRepositoryImpl implements IProductRepository {
         return productDTOList;
     }
 
-    // Implementacion del metodo buscar por categoria
     @Override
-    public List<ProductDTO> getProductByCategory(String categoryName) throws findCategoryException {
-
-        try {
-            List<ProductDTO> productDTOList = null;
-            productDTOList = loadData();
-            List<ProductDTO> listByCategory = null;
-            if (productDTOList != null){
-                // manipular flujo de datos de la coleccion
-                listByCategory = productDTOList.stream()
-                        .filter(ProductDTO -> checkIfEquals(ProductDTO, categoryName))
-                        .collect(Collectors.toList());
-            }
-            return listByCategory;
-
-        } catch (Exception e) {
-            throw new findCategoryException(categoryName);
+    public List<ProductDTO> filter(ProductDTO producto)throws findCategoryException {
+        List<ProductDTO> productDTOList = loadData();
+        if ( producto.getCategory() != null) {
+            productDTOList = filterByCategory(productDTOList, producto);
         }
-
+        return productDTOList;
     }
 
-    private boolean checkIfEquals(ProductDTO productDTO, String categoryName) {
-        return productDTO.equals(categoryName);
+    public List<ProductDTO> filterByCategory(List<ProductDTO> filterCategory, ProductDTO producto) {
+        return filterCategory.stream().filter((ProductDTO p) ->
+                p.getCategory().toLowerCase().contains(producto.getCategory().toLowerCase())).collect(Collectors.toList());
     }
+
 
     // Disposicion de datos por "dbProducts.json"
     private List<ProductDTO> loadData() {

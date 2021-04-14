@@ -22,10 +22,13 @@ public class ProductServiceImpl implements IProductService {
         return productRepositoryImpl.productList();
     }
 
+
     // Implementacion del metodo para buscar producto por Category bajo la firma de IProductService
     @Override
-    public List<ProductDTO> getProductsByCategory(String category) throws findCategoryException {
-        return productRepositoryImpl.getProductByCategory(category);
+    public List<ProductDTO> getProductsByCategory(String categoryName) throws findCategoryException {
+        ProductDTO product = new ProductDTO();
+        product.setCategory(categoryName);
+        return productRepositoryImpl.filter(product);
     }
 
 }

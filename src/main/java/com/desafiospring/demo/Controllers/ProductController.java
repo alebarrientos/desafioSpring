@@ -27,9 +27,9 @@ public class ProductController {
     }
 
     // Response con filtro de categoria
-    @GetMapping("/api/v1/articles?category={categoryName}")
-    public List<ProductDTO> getProductsByCategory(@RequestParam String categoryName) throws findCategoryException {
-        return productsService.getProductByCategory(categoryName);
+    @GetMapping("/api/v1/articles1")
+    public List<ProductDTO> getCategory(@RequestParam(required = false) String categoryName) throws findCategoryException {
+        return productsService.get;
     }
 
     //@GetMapping("api/v1/articles?category={categoryName}&freeShipping={true}")
